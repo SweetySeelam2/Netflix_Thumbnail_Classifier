@@ -13,10 +13,9 @@ st.set_page_config(
     page_icon="🎥"
 )
 
-# -------------------- LOAD MODEL --------------------
-@st.cache_resource
+# -------------------- LOAD MODEL (NO CACHE TO PREVENT MemoryError) --------------------
 def load_model():
-    model = tf.keras.models.load_model("model/genre_model.keras")
+    model = tf.keras.models.load_model("model/genre_model.h5")
     with open("model/label_map.pkl", "rb") as f:
         label_map = pickle.load(f)
     return model, label_map

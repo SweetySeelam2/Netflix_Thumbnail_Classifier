@@ -19,7 +19,7 @@ Thumbs.db
 *.tmp
 
 # Avoid large model checkpoints (optional if not using)
-*.h5
+*.keras
 *.ckpt
 *.weights
 
