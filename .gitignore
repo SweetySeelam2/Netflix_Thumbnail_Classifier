@@ -1,5 +1,6 @@
-# Ignore full training dataset
+# Ignore all local poster data
 data/posters/
+data/sample_posters/
 
 # Ignore Python cache
 __pycache__/
@@ -19,7 +20,6 @@ Thumbs.db
 *.tmp
 
 # Avoid large model checkpoints (optional if not using)
-*.keras
 *.ckpt
 *.weights
 
