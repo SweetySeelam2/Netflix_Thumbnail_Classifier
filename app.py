@@ -16,7 +16,7 @@ st.set_page_config(
 # -------------------- LOAD MODEL --------------------
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("model/genre_model_densenet.keras")
+    model = tf.keras.models.load_model("model/genre_model.keras")
     with open("model/label_map.pkl", "rb") as f:
         label_map = pickle.load(f)
     return model, label_map
