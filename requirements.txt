@@ -1,6 +1,10 @@
 streamlit
+tensorflow
 numpy
 opencv-python
-tensorflow
-pillow
+Pillow
+matplotlib
 scikit-learn
+pandas
+tqdm
+requests

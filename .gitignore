@@ -1,0 +1,27 @@
+# Ignore full training dataset
+data/posters/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
+
+# OS & editor-specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Avoid large model checkpoints (optional if not using)
+*.h5
+*.ckpt
+*.weights
+
+# VS Code config (optional)
+.vscode/
