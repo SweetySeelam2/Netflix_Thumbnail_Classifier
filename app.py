@@ -2,7 +2,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import cv2
 import os
 import tensorflow as tf
 import pickle
@@ -68,7 +67,7 @@ elif page == "📤 Try It Now":
 
     uploaded_file = st.file_uploader("📤 Upload a poster (JPG/PNG)", type=["jpg", "jpeg", "png"])
 
-    sample_folder = "data/sample_posters"
+    sample_folder = r"C:\Users\sweet\Desktop\DataScience\Github projects\Deployment files\DL-Recommendation-streamlit\data\sample_posters"
     sample_files = [f for f in os.listdir(sample_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
 
     st.markdown("Or use a sample poster:")
