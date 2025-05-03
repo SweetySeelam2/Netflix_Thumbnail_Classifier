@@ -25,3 +25,6 @@ Thumbs.db
 
 # VS Code config (optional)
 .vscode/
+
+# Never commit secret files
+.env

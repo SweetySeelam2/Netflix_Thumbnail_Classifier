@@ -4,15 +4,15 @@ from tqdm import tqdm
 import time
 from dotenv import load_dotenv
 
-# ✅ Step 1: Load API key securely from .env
-load_dotenv()
+# Step 1: Add your TMDB API key
+load_dotenv()  # Load variables from .env file
 API_KEY = os.getenv("TMDB_API_KEY")
 
-# ✅ Step 2: TMDB API URLs
+# Step 2: TMDB API URLs
 BASE_URL = "https://api.themoviedb.org/3"
 IMG_BASE = "https://image.tmdb.org/t/p/w500"
 
-# ✅ Step 3: Genre mapping
+# Step 3: Define target genres and their TMDB IDs
 GENRE_MAP = {
     "Action": 28,
     "Comedy": 35,
@@ -21,14 +21,14 @@ GENRE_MAP = {
     "Thriller": 53
 }
 
-# ✅ Step 4: Set output folder
+# Step 4: Set output folder path
 OUTPUT_DIR = r"C:\Users\sweet\Desktop\DataScience\Github projects\Deployment files\DL-Recommendation-streamlit\data\posters"
 
-# ✅ Step 5: Ensure genre folders exist
+# Step 5: Create folders for each genre
 for genre in GENRE_MAP:
     os.makedirs(os.path.join(OUTPUT_DIR, genre), exist_ok=True)
 
-# ✅ Step 6: Function to download posters
+# Step 6: Download posters from TMDB API
 def download_posters(genre_name, genre_id, max_count=500):
     page = 1
     downloaded = 0
@@ -59,10 +59,6 @@ def download_posters(genre_name, genre_id, max_count=500):
             img_url = f"{IMG_BASE}{poster_path}"
             save_path = os.path.join(OUTPUT_DIR, genre_name, f"{movie_id}.jpg")
 
-            # ✅ Skip already existing files
-            if os.path.exists(save_path):
-                continue
-
             try:
                 img_data = requests.get(img_url).content
                 with open(save_path, 'wb') as handler:
@@ -79,7 +75,6 @@ def download_posters(genre_name, genre_id, max_count=500):
 
     print(f"✅ Downloaded {downloaded} posters for {genre_name}")
 
-# ✅ Step 7: Manual control
-# Uncomment the block below only if you intentionally want to download again
-# for genre_name, genre_id in GENRE_MAP.items():
-#     download_posters(genre_name, genre_id, max_count=500)
+# Step 7: Loop through all genres
+for genre_name, genre_id in GENRE_MAP.items():
+    download_posters(genre_name, genre_id, max_count=500)
