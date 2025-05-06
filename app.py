@@ -42,13 +42,12 @@ This Deep Learning project classifies Netflix movie thumbnails into five genres 
     """)
 
 elif selection == "Try It Now":
-    st.header("🖼️ Upload a Poster to Predict Genre")
-    
-    st.header("🖼️ Upload a Poster to Predict Genre")
+    st.header("🖼️ Try It Now")
 
     col1, col2 = st.columns(2)
 
     with col1:
+        st.markdown("### Upload Your Own Poster:")
         uploaded_file = st.file_uploader("Upload Your Own Poster", type=["jpg", "jpeg", "png"])
         submit_user = st.button("Submit", key="submit_user")
 
@@ -61,7 +60,7 @@ elif selection == "Try It Now":
             "Romance": "data/sample_posters/romance.jpg",
             "Thriller": "data/sample_posters/thriller.jpg"
         }
-        selected_sample = st.selectbox("Select a sample genre poster", list(sample_options.keys()))
+        selected_sample = st.selectbox("Select a sample genre poster from the dropdown menu", list(sample_options.keys()))
         submit_sample = st.button("Submit", key="submit_sample")
 
     image = None
@@ -135,22 +134,11 @@ elif selection == "Results & Insights":
     st.image("images/Confusion_Matrix_EffNetB4.png", width=550)
     st.markdown("_Confusion matrix shows clearer separation between Drama and Comedy, while Thriller overlaps with Action._")
 
-    st.image("images/Accuracy_Plot_EffNetB4.png", use_column_width=True)
-
-    st.subheader("📉 Loss Plot")
-    st.image("images/Loss_Plot_EffNetB4.png", use_column_width=True)
-
-    st.subheader("📘 Classification Report")
-    st.image("images/Classification_Report_EffNetB4.png", use_column_width=True)
-
-    st.subheader("🔁 Confusion Matrix")
-    st.image("images/Confusion_Matrix_EffNetB4.png", use_column_width=True)
-
     st.markdown("**Final Accuracy:** 39%")
     st.markdown("**Business Impact:**")
     st.markdown("""
-- 🔁 Auto-tagging efficiency ↑
-- 🎯 Poster recommendation precision ↑
+- 🔁 Auto-tagging efficiency ↑ (by reducing tagging time by 85–90%)
+- 🎯 Poster recommendation precision ↑ 
 - 💵 Estimated Revenue Potential: $60–$100M/year
 - 🧠 Manual workload ↓ 60-70%
     """)
