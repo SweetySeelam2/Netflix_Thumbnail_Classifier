@@ -10,4 +10,3 @@ tqdm
 requests
 seaborn
 opencv-python
-pickle5
