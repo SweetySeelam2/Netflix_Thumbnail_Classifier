@@ -8,3 +8,6 @@ scikit-learn
 pandas
 tqdm
 requests
+seaborn
+opencv-python
+pickle5
