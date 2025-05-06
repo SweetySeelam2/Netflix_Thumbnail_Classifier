@@ -48,7 +48,7 @@ elif selection == "Try It Now":
 
     with col1:
         st.markdown("### Upload Your Own Poster:")
-        uploaded_file = st.file_uploader("Upload Your Own Poster", type=["jpg", "jpeg", "png"])
+        uploaded_file = st.file_uploader("Browse the image from your system", type=["jpg", "jpeg", "png"])
         submit_user = st.button("Submit", key="submit_user")
 
     with col2:
