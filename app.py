@@ -11,6 +11,7 @@ st.set_page_config(page_title="Netflix Thumbnail Genre Classifier", layout="wide
 # Load EfficientNetB4 fine-tuned model
 model_path = "model/final_efficientnetb4_model.h5"
 model = tf.keras.models.load_model(model_path)
+print("Model input shape:", model.input_shape)  # ✅ Debug check
 
 # Load label map for EfficientNetB4
 with open("model/label_map_efficientnetb4.pkl", "rb") as f:
@@ -72,7 +73,7 @@ elif selection == "Try It Now":
 
     if image is not None:
         st.markdown("### ✅ Prediction Output:")
-        img_resized = image.resize((380, 380))
+        img_resized = img.resize((224, 224))  # ✅ Matches model input
         img_array = np.array(img_resized) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
 
