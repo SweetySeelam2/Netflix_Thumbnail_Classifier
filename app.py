@@ -9,11 +9,11 @@ import os
 st.set_page_config(page_title="Netflix Thumbnail Genre Classifier", layout="wide")
 
 # Load EfficientNetB4 fine-tuned model
-model_path = "model/efficientnetb4_model.h5"
+model_path = "model/final_efficientnetb4_model.h5"
 model = tf.keras.models.load_model(model_path)
 
 # Load label map for EfficientNetB4
-with open("model/label_map_effnetb4.pkl", "rb") as f:
+with open("model/label_map_efficientnetb4.pkl", "rb") as f:
     label_map = pickle.load(f)
 inv_label_map = {v: k for k, v in label_map.items()}
 
