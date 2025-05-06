@@ -43,7 +43,48 @@ This Deep Learning project classifies Netflix movie thumbnails into five genres 
 
 elif selection == "Try It Now":
     st.header("🖼️ Upload a Poster to Predict Genre")
-    uploaded_file = st.file_uploader("Upload Poster Image", type=["jpg", "jpeg", "png"])
+    
+    st.header("🖼️ Upload a Poster to Predict Genre")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        uploaded_file = st.file_uploader("Upload Your Own Poster", type=["jpg", "jpeg", "png"])
+        submit_user = st.button("Submit", key="submit_user")
+
+    with col2:
+        st.markdown("### Try Our Sample Posters:")
+        sample_options = {
+            "Action": "data/sample_posters/action.jpg",
+            "Comedy": "data/sample_posters/comedy.jpg",
+            "Drama": "data/sample_posters/drama.jpg",
+            "Romance": "data/sample_posters/romance.jpg",
+            "Thriller": "data/sample_posters/thriller.jpg"
+        }
+        selected_sample = st.selectbox("Select a sample genre poster", list(sample_options.keys()))
+        submit_sample = st.button("Submit", key="submit_sample")
+
+    image = None
+    if submit_user and uploaded_file is not None:
+        image = Image.open(uploaded_file).convert("RGB")
+    elif submit_sample:
+        image_path = sample_options[selected_sample]
+        image = Image.open(image_path).convert("RGB")
+
+    if image is not None:
+        st.markdown("### ✅ Prediction Output:")
+        img_resized = image.resize((380, 380))
+        img_array = np.array(img_resized) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
+
+        prediction = model.predict(img_array)
+        confidence = np.max(prediction)
+        predicted_label = inv_label_map[np.argmax(prediction)]
+
+        st.markdown(f"**Predicted Genre:** `{predicted_label}`")
+        st.markdown(f"**Confidence:** `{confidence * 100:.2f}%`")
+        st.image(image, caption="Poster Input", use_column_width=True)
+
 
     if uploaded_file is not None:
         image = Image.open(uploaded_file).convert("RGB")
@@ -77,7 +118,23 @@ Fine-tuned on 2,330 balanced images from TMDB (466 per genre) after deduplicatio
 elif selection == "Results & Insights":
     st.header("📊 Model Evaluation & Insights")
 
+    
     st.subheader("✅ Accuracy Plot")
+    st.image("images/Accuracy_Plot_EffNetB4.png", width=550)
+    st.markdown("_The model reaches around 39% accuracy after training with EfficientNetB4. This reflects decent genre separation based on visual features._")
+
+    st.subheader("📉 Loss Plot")
+    st.image("images/Loss_Plot_EffNetB4.png", width=550)
+    st.markdown("_Training and validation loss decreased steadily before early stopping, confirming good convergence._")
+
+    st.subheader("📘 Classification Report")
+    st.image("images/Classification_Report_EffNetB4.png", width=550)
+    st.markdown("_The macro and weighted F1-scores indicate balanced genre prediction across classes._")
+
+    st.subheader("🔁 Confusion Matrix")
+    st.image("images/Confusion_Matrix_EffNetB4.png", width=550)
+    st.markdown("_Confusion matrix shows clearer separation between Drama and Comedy, while Thriller overlaps with Action._")
+
     st.image("images/Accuracy_Plot_EffNetB4.png", use_column_width=True)
 
     st.subheader("📉 Loss Plot")
@@ -94,8 +151,8 @@ elif selection == "Results & Insights":
     st.markdown("""
 - 🔁 Auto-tagging efficiency ↑
 - 🎯 Poster recommendation precision ↑
-- 💵 Revenue Potential: $60–$90M/year
-- 🧠 Manual workload ↓ 70%
+- 💵 Estimated Revenue Potential: $60–$100M/year
+- 🧠 Manual workload ↓ 60-70%
     """)
 
 # Footer license section (✅ RESTORED EXACTLY)
