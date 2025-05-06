@@ -73,7 +73,7 @@ elif selection == "Try It Now":
 
     if image is not None:
         st.markdown("### ✅ Prediction Output:")
-        img_resized = img.resize((224, 224))  # ✅ Matches model input
+        img_resized = image.resize((224, 224))  # ✅ Fix here
         img_array = np.array(img_resized) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
 
