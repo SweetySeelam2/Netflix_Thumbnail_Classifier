@@ -81,7 +81,10 @@ elif selection == "Try It Now":
     if image:
         st.image(image, caption="Input Poster", use_column_width=True)
         img_array = preprocess_image(image)
+
         prediction = model.predict(img_array)
+        print("Raw prediction vector:", prediction)  # <== DEBUG PRINT
+
         predicted_label = inv_label_map[np.argmax(prediction)]
         confidence = np.max(prediction) * 100
 
