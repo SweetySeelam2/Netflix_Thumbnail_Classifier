@@ -28,9 +28,10 @@ selection = st.sidebar.radio("Go to", pages)
 
 # Utility function to preprocess image
 def preprocess_image(image):
-    img_resized = image.resize((380, 380))
-    img_array = np.array(img_resized) / 255.0
-    return np.expand_dims(img_array, axis=0)
+    img = image.resize((224, 224))  # ✅ MATCH training input shape
+    img_array = np.array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)  # Shape: (1, 224, 224, 3)
+    return img_array
 
 if selection == "Project Overview":
     st.header("📌 Project Overview")
@@ -91,7 +92,7 @@ elif selection == "Model Info":
     st.header("🧠 Model Details")
     st.markdown("""
 - Architecture: EfficientNetB4  
-- Input Size: 380x380  
+- Input Size: 224x224  
 - Optimizer: Adam (lr=1e-5)  
 - Loss: Categorical Crossentropy  
 - Regularization: Dropout 0.3, Class Weights  
